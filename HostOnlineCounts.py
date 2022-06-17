@@ -27,7 +27,7 @@ def load_csv():
     #load csv into pandas
     df = pd.read_csv(filename)
     #remove duplicates based on Host Name
-    df.drop_duplicates(subset='Host Name', keep='first', inplace=True)
+    #df.drop_duplicates(subset='Host Name', keep='first', inplace=True)
     #store values from First Seen (UTC) column and Last Seen (UTC) column in two seprate variables and end the function
     first_seen = df['First Seen (UTC)'].values
     last_seen = df['Last Seen (UTC)'].values
@@ -71,6 +71,16 @@ def display_results():
     for i in difference:
         if i >= 24:
             count5 += 1
+    #count the amount of values in the list that are greater than or equal to 168 hours or 1 week.
+    count6 = 0
+    for i in difference:
+        if i >= 168:
+            count6 += 1
+    #count the amount of values in the list that are greater than or equal to 720 hours or 1 month.
+    count7 = 0
+    for i in difference:
+        if i >= 720:
+            count7 += 1
 
     #create a tkinter label to display the results in large text
     label = tk.Label(window, text="""
@@ -79,7 +89,9 @@ def display_results():
     There are {} devices that have been online for more than 4 hours.
     There are {} devices that have been online for more than 8 hours.
     There are {} devices that have been online for more than 24 hours.
-    """.format(count, count2, count3, count4, count5))
+    There are {} devices that have been online for atleast a week.
+    There are {} devices that have been online for atleast a month.
+    """.format(count, count2, count3, count4, count5, count6, count7))
     label.pack()
 
 #create a button to display results that is centered on the page
@@ -89,4 +101,3 @@ button.pack()
 
 #close tkinter window
 window.mainloop()
-

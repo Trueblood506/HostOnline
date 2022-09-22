@@ -3,7 +3,7 @@
 #Download the report as a CSV file and save locally
 #Run Python Script and navigate to CSV File
 #Select CSV and click open 
-#Profit
+
 
 import pandas as pd
 import tkinter as tk
